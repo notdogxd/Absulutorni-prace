@@ -1,0 +1,7 @@
+potřebujeme rok což je 12 týdnů to ukázat ty týdny
+chceme přidávat úkoly
+chceme přidávat seznam
+chceme na konci dne hodnotit úkoly
+chceme umět manipulovat s úkoly a seznamy
+umět udělat cíle
+přidat hlavní timer který bude mít 10 000
