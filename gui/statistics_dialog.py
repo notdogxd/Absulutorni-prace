@@ -1,7 +1,7 @@
 """
 Statistics Dialog - zobrazení statistik s 4 taby
 """
-
+import math
 from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, 
                              QPushButton, QTabWidget, QWidget, QComboBox,
                              QScrollArea, QFrame, QProgressBar)
@@ -334,7 +334,12 @@ class StatisticsDialog(QDialog):
         
         progress_bar = QProgressBar()
         progress_bar.setMaximum(10)
-        progress_bar.setValue(int(cat['avg_score']))
+
+        #progress_bar.setValue(int(cat['avg_score']))
+
+        avg_score = cat['avg_score'] if not (isinstance(cat['avg_score'], float) and math.isnan(cat['avg_score'])) else 0.0
+        progress_bar.setValue(int(avg_score))
+        
         progress_bar.setTextVisible(False)
         progress_bar.setFixedHeight(25)
         

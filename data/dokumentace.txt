@@ -1,1 +1,0 @@
-vytvoril jsem classy pro ukoly(tasky), gui, cile(goals), k tomu pomocne classy alltasks, 

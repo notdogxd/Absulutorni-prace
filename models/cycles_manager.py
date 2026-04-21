@@ -88,7 +88,7 @@ class CyclesManager:
         if start_date is None:
             start_date = datetime.now()
         
-        # Vypočítaj cycle_id (největší ID + 1)
+        # Vypočítej cycle_id (největší ID + 1)
         if self.cycles:
             # Máme nějaké cykly - vezmi max ID a přičti 1
             cycle_id = max(c["id"] for c in self.cycles) + 1
@@ -117,8 +117,6 @@ class CyclesManager:
         print(f"✅ Vytvořen cyklus #{cycle_id}: {start_date.date()} - {end_date.date()}")
         
         return new_cycle
-    
-    def archive_current_cycle(self):
         """
         Archivuje aktivní cyklus
         
@@ -130,15 +128,19 @@ class CyclesManager:
         5. Smaže data z data/active/
         """
         # Najdi aktivní cyklus
+       
+    
+    def archive_current_cycle(self):
+
         active = self.get_active_cycle()
         
         if not active:
-            print("⚠️ Žádný aktivní cyklus k archivaci")
+            print("Žádný aktivní cyklus k archivaci")
             return False
         
         cycle_id = active["id"]
         
-        print(f"📦 Archivuji cyklus #{cycle_id}...")
+        print(f"Archivuji cyklus #{cycle_id}...")
         
         # Název archive souboru
         archive_filename = f"cycle_{cycle_id:03d}.pkl"
@@ -159,7 +161,7 @@ class CyclesManager:
         with open(archive_path, 'wb') as f:
             pickle.dump(archive_data, f)
         
-        print(f"✅ Data uložena do {archive_filename}")
+        print(f"Data uložena do {archive_filename}")
         
         # Označ cyklus jako "completed"
         active["status"] = "completed"
@@ -172,9 +174,11 @@ class CyclesManager:
         # Smaž soubory z active/
         self._clear_active_directory()
         
-        print(f"✅ Cyklus #{cycle_id} archivován")
+        print(f"Cyklus #{cycle_id} archivován")
         
         return True
+    
+        
     
     def _load_file_if_exists(self, filepath):
         """
@@ -210,12 +214,12 @@ class CyclesManager:
             filepath = os.path.join(self.active_dir, filename)
             if os.path.exists(filepath):
                 os.remove(filepath)
-                print(f"  🗑️ Smazán {filename}")
+                print(f"Smazán {filename}")
         
-        print("✅ Active složka vyčištěna")
+        print("Active složka vyčištěna")
         
         # Vytvoř prázdné soubory pro nový cyklus
-        print("  📝 Vytvářím prázdné soubory...")
+        print("Vytvářím prázdné soubory...")
         
         empty_tasks = pd.DataFrame(columns=["name", "subclass", "date", "hours", "score", "review"])
         empty_goals = pd.DataFrame(columns=["goal_name", "subclass", "timer", "average_score", "date_of_creation", "checked", "end_date", "completed"])
@@ -229,7 +233,7 @@ class CyclesManager:
         empty_rewards.to_pickle(f"{self.active_dir}/reward_dataframe.pkl")
         empty_settings.to_pickle(f"{self.active_dir}/settings_dataframe.pkl")
         
-        print("✅ Prázdné soubory vytvořeny")
+        print("Prázdné soubory vytvořeny")
     
     def needs_new_cycle(self):
         """

@@ -175,7 +175,7 @@ class DayWidget(QWidget):
             task_name = task[0]
             task_hours = task[3]
             
-            # ===== PŘIDEJ TOTO =====
+            
             # Zkontroluj jestli má review
             has_review = False
             if len(task) > 5:
@@ -185,13 +185,12 @@ class DayWidget(QWidget):
             
             # Ikona podle review
             icon = "✅" if has_review else "•"
-            # ===== KONEC =====
             
             # Zkrať název
             max_length = 18    
             display_name = task_name if len(task_name) <= max_length else task_name[:max_length] + "..."
             
-            task_label = QLabel(f"{icon} {display_name}\n   ({task_hours}h)")  # ← ZMĚNĚNO (icon místo •)
+            task_label = QLabel(f"{icon} {display_name}\n   ({task_hours}h)")  
             task_label.setAlignment(Qt.AlignLeft)
             task_label.setStyleSheet("color: lightgray; font-size: 14px; padding-left: 10px;")
             task_label.setToolTip(task_name)
@@ -234,7 +233,6 @@ class DayWidget(QWidget):
                 reward_time = reward[2]  # time
                 reward_finished = reward[3]  # finished
                 
-                # ===== KONTROLA JESTLI JE ZREVIEWOVANÁ =====
                 is_reviewed = False
                 if len(reward) > 4:
                     actual_time = reward[4]  # actual_time
@@ -246,7 +244,6 @@ class DayWidget(QWidget):
                     icon = "✅"  # Zreviewovaná (splněná NEBO má actual_time)
                 else:
                     icon = "🎁"  # Nezreviewovaná
-                # ===== KONEC KONTROLY =====
                 
                 # Zkrať název pokud je moc dlouhý
                 max_length = 18  # O trochu kratší kvůli ikoně

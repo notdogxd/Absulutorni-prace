@@ -16,7 +16,7 @@ from models.all_tasks import All_tasks
 from models.goal import Goal
 from models.notes_class import Note
 from models.reward import Reward
-from models.cycles_manager import CyclesManager  # ← PŘIDEJ
+from models.cycles_manager import CyclesManager  
 from gui.review_day_dialog import ReviewDayDialog
 
 
@@ -154,7 +154,7 @@ class WeekView(QMainWindow):
         # Horizontální layout pro horní lištu
         top_layout = QHBoxLayout()
 
-        # ===== PŘIDEJ TOTO (NOVÉ) =====
+        
         # Hamburger menu button (vlevo)
         self.menu_button = QPushButton("☰")
         self.menu_button.setFixedSize(80, 40)
@@ -218,9 +218,8 @@ class WeekView(QMainWindow):
             # 2. Ulož si widget pro pozdější aktualizaci
             self.day_widgets.append(day_widget)
             
-            # 3. ZAVOLEJ update_content (TOHLE JE KLÍČOVÉ)
+            # 3. ZAVOLEJ update_content
             # Tato metoda se postará o vytvoření nadpisu dne, data, úkolů, notes i rewards.
-            # Nemusíš tu nic vypisovat ručně.
             day_widget.update_content(date, day, self.all_tasks, self.note, self.reward)
         
             # 4. Přidej widget do kontejneru
@@ -283,7 +282,7 @@ class WeekView(QMainWindow):
             self,
             "Archive Cycle",
             f"Archive Cycle #{cycle_id}\n\n"
-            f"Period: {start_date_str} - {end_date_str}\n"  # ← OPRAVENO
+            f"Period: {start_date_str} - {end_date_str}\n" 
             f"Days remaining: {days_left}\n\n"
             f"Continue?",
             QMessageBox.Yes | QMessageBox.No,
@@ -650,8 +649,6 @@ class WeekView(QMainWindow):
         """
         Otevře review dialog pro daný den
         """
-        from gui.review_day_dialog import ReviewDayDialog
-        
         # Získej tasky pro tento den
         tasks_for_day = []
         task_indices = []
@@ -757,7 +754,7 @@ class WeekView(QMainWindow):
                 print("❌ Žádný aktivní cyklus!")
                 return
             
-            cycle_start = active_cycle['start_date']  # ← NOVÁ VERZE
+            cycle_start = active_cycle['start_date']  
             cycle_end = active_cycle['end_date']
             
             # Ulož každý goal do backendu
@@ -814,7 +811,7 @@ class WeekView(QMainWindow):
         if not active_cycle:
             return []  # Žádný aktivní cyklus
         
-        current_start = active_cycle['start_date']  # ← NOVÁ VERZE (z cycles_manager)
+        current_start = active_cycle['start_date']  
         
         # Filtruj goals podle start_date
         current_goals = []
